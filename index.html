@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WoTChristmas2017Calculator</title>
+    <style>
+        #result{
+            width: 100%;
+            height: 60vh;
+        }
+    </style>
+</head>
+<body>
+    <h2>WoTChristmas2017Calculator</h2>
+    <label for="item-amount">Item Amount：</label>
+    <input type="number" id="item-amount" min="1" step="1" value="13">
+    <label for="base-price">Base Price：</label>
+    <input type="number" id="base-price" min="0" step="1" value="480">
+    <label for="sell-price">Sell Price：</label>
+    <input type="number" id="sell-price" min="0" step="1" value="250">
+    <button id="calc" type="button">GO</button>
+    <br>
+    <textarea id="result"></textarea>
+    <script>
+        document.getElementById("calc").addEventListener("click",function(){
+            var amount=Number(document.getElementById("item-amount").value);
+            var basePrice=Number(document.getElementById("base-price").value);
+            var sellPrice=Number(document.getElementById("sell-price").value);
+            var returnPrice=basePrice-sellPrice;
+            for(var i=amount;i>0;i--){
+                var p=i/amount,np=1-p,price=basePrice;
+                var result=0;
+                for(var j=0;j<1000;j++){
+                    result+=p*price;
+                    p*=np;
+                    price+=returnPrice;
+                }
+                document.getElementById("result").value+="UnobtainItem："+i+",ExpectPrice："+result+"\n";
+            }
+        });
+    </script>
+</body>
+</html>
